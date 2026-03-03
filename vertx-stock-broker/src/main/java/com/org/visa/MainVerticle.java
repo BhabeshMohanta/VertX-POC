@@ -32,16 +32,6 @@ public class MainVerticle extends AbstractVerticle {
     AssetsRestApi.attachV2(restApi);
     WatchListRestApi.attachV2(restApi);
 
-   /* restApi.get("/assets").handler(context ->{
-      final JsonArray response =new JsonArray();
-      response.add(new JsonObject().put("symbal", "AAPL"))
-      .add(new JsonObject().put("symbal", "AMZN"))
-      .add(new JsonObject().put("symbal", "NTFX"))
-      .add(new JsonObject().put("symbal", "TSLA"));
-      LOG.info("Path {} responds with {}", context.normalizedPath(), response.encode());
-      context.response().end(response.toBuffer());
-    });*/
-
     vertx.createHttpServer().requestHandler(restApi)
       .exceptionHandler(error -> LOG.error("HTTP Server Error: ", error))
       .listen(8888, http -> {
@@ -53,37 +43,6 @@ public class MainVerticle extends AbstractVerticle {
       }
     });
   }
-
-
-
-  /*@Override
-  public void start(Promise<Void> startPromise) throws Exception {
-    vertx.deployVerticle(VersionInfoVerticle.class.getName())
-      .onFailure(startPromise::fail)
-      .onSuccess(id -> LOG.info("Deployed {} with id {}", VersionInfoVerticle.class.getSimpleName(), id))
-     // .compose(next -> migrateDatabase())
-      .onFailure(startPromise::fail)
-      .onSuccess(id -> LOG.info("Migrated db schema to latest version!"))
-      .compose(next -> deployRestApiVerticle(startPromise));
-  }*/
-
- /* private Future<Void> migrateDatabase() {
-    return ConfigLoader.load(vertx)
-      .compose(config -> {
-        return FlywayMigration.migrate(vertx, config.getDbConfig());
-      });
-  }*/
-
-  /*private Future<String> deployRestApiVerticle(final Promise<Void> startPromise) {
-    return vertx.deployVerticle(RestApiVerticle.class.getName(),
-      new DeploymentOptions().setInstances(halfProcessors())
-    )
-      .onFailure(startPromise::fail)
-      .onSuccess(id -> {
-        LOG.info("Deployed {} with id {}", RestApiVerticle.class.getSimpleName(), id);
-        startPromise.complete();
-      });
-  }*/
 
   private int halfProcessors() {
     return Math.max(1, Runtime.getRuntime().availableProcessors() / 2);
