@@ -1,0 +1,31 @@
+= Vertx Stock Broker
+
+== Features:
+* REST API
+* Lombok
+* Configuration
+* Reactive SQL Client
+* SQL Client Templates
+* Flyway
+* JUnit 5
+
+URL:
+GET: http://localhost:8888/assets
+GET: http://localhost:8888/account/watchlist/279b0290-560c-4d59-8f2a-2fa0bac06768
+PUT: curl --location --request PUT 'http://localhost:8888/account/watchlist/279b0290-560c-4d59-8f2a-2fa0bac06768' \
+     --header 'Content-Type: application/json' \
+     --data '{
+         "assets": [
+             {
+                 "name": "AMZN"
+             },
+             {
+                 "name": "TSLA"
+             },
+             {
+                 "name": "NFLX"
+             }
+         ]
+     }'
+
+DELETE: http://localhost:8888/account/watchlist/279b0290-560c-4d59-8f2a-2fa0bac06768
