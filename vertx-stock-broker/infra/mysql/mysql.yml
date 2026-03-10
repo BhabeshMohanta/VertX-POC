@@ -10,8 +10,8 @@ services:
       # Create db
       MYSQL_DATABASE: vertx-stock-broker
       # Use root/secret user/password credentials
-      MYSQL_PASSWORD: secret
-      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: 
+      MYSQL_ROOT_PASSWORD: 
     ports:
       - 3306:3306
 
